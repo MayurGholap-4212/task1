@@ -3,14 +3,22 @@ from django.db import models
 # Create your models here.
 from django.db import models
 
-class Student(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    course=models.CharField(max_length=100)
-    subject=models.CharField(max_length=100,default='1')
-    age = models.PositiveIntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+from django.db import models
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+# Create your models here.
+
+class Roll(models.Model):
+    usertype = models.CharField(max_length=100,default=True)
+
+    def str(self):
+        return self.usertype
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    roll_no = models.IntegerField()
+    email = models.EmailField()
+    roll = models.ManyToManyField(Roll)
+
+
+    def str(self):
+        return self.name
